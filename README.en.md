@@ -67,6 +67,8 @@ The resulting `dist/Shiyin.app` contains them in `Contents/MacOS/Tools` and uses
 
 The repository includes `script/fetch_release_tools.sh` to download and verify official yt-dlp and Deno releases, and `script/build_portable_ffmpeg.sh` to build standalone `ffmpeg` and `ffprobe` from FFmpeg source and static LAME and mpg123 libraries on the build Mac; see the bundled tool notes for the commands.
 
+See the [DMG release guide](docs/release-dmg.en.md) for a downloadable GitHub Release asset. Without a Developer ID certificate, `./script/package_dmg.sh --local` creates a test image for local validation only.
+
 ## How to use
 
 1. Click **Import Link** (导入链接) and paste a YouTube or Bilibili URL. A Bilibili BV link downloads its current part by default; select **Import all parts** (导入全部分 P) to preview every part.

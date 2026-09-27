@@ -11,6 +11,8 @@ TOOLS_DIR=""
 SIGN_IDENTITY="-"
 MINIMUM_MACOS="14.0"
 BUILD_CONFIGURATION="debug"
+APP_VERSION="0.1.0"
+BUILD_NUMBER="1"
 
 while (($#)); do
   case "$1" in
@@ -24,9 +26,28 @@ while (($#)); do
       SIGN_IDENTITY="$2"
       shift 2
       ;;
-    *) echo "Usage: $0 [--tools-dir DIRECTORY] [--sign-identity IDENTITY]" >&2; exit 2 ;;
+    --version)
+      [[ $# -ge 2 ]] || { echo "Missing value for --version" >&2; exit 2; }
+      APP_VERSION="$2"
+      shift 2
+      ;;
+    --build-number)
+      [[ $# -ge 2 ]] || { echo "Missing value for --build-number" >&2; exit 2; }
+      BUILD_NUMBER="$2"
+      shift 2
+      ;;
+    *) echo "Usage: $0 [--tools-dir DIRECTORY] [--sign-identity IDENTITY] [--version VERSION] [--build-number NUMBER]" >&2; exit 2 ;;
   esac
 done
+
+[[ "$APP_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+([.-][0-9A-Za-z.-]+)?$ ]] || {
+  echo "Invalid app version: $APP_VERSION" >&2
+  exit 2
+}
+[[ "$BUILD_NUMBER" =~ ^[1-9][0-9]*$ ]] || {
+  echo "Invalid build number: $BUILD_NUMBER" >&2
+  exit 2
+}
 
 if [[ -n "$TOOLS_DIR" ]]; then
   BUILD_CONFIGURATION="release"
@@ -119,8 +140,8 @@ cat > "$APP_CONTENTS/Info.plist" <<PLIST
   <key>CFBundleDisplayName</key><string>拾音</string>
   <key>CFBundlePackageType</key><string>APPL</string>
   <key>CFBundleIconFile</key><string>Shiyin</string>
-  <key>CFBundleShortVersionString</key><string>0.1.0</string>
-  <key>CFBundleVersion</key><string>1</string>
+  <key>CFBundleShortVersionString</key><string>$APP_VERSION</string>
+  <key>CFBundleVersion</key><string>$BUILD_NUMBER</string>
   <key>LSMinimumSystemVersion</key><string>$MINIMUM_MACOS</string>
   <key>NSPrincipalClass</key><string>NSApplication</string>
 </dict>

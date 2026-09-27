@@ -67,6 +67,8 @@ brew install yt-dlp ffmpeg deno
 
 仓库提供 `script/fetch_release_tools.sh` 下载并校验官方 yt-dlp、Deno，以及 `script/build_portable_ffmpeg.sh` 从源码和构建机上的静态 LAME、mpg123 库生成独立的 `ffmpeg`、`ffprobe`；具体命令见内置工具说明。
 
+制作可供 GitHub Release 下载的 DMG，见[DMG 发布流程](docs/release-dmg.md)。没有 Developer ID 证书时，可运行 `./script/package_dmg.sh --local` 生成仅供本机验证的测试包。
+
 ## 如何使用
 
 1. 点击「导入链接」，粘贴 YouTube 或 B 站链接。B 站单个 BV 视频默认下载当前分 P；勾选「导入全部分 P」可预览全部分 P。
