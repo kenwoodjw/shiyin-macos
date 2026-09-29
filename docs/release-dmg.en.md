@@ -42,7 +42,21 @@ To verify DMG creation without Developer ID signing:
 ./script/package_dmg.sh --local
 ```
 
-The output has `-LOCAL` in its name and is **not** a regular distribution package. Before sharing a test image, check third-party license and source materials and test installation and playback on a clean target Mac.
+The output has `-LOCAL` in its name and is **not** a regular distribution package. Before sharing a test image, check third-party license and source materials. Testing installation and playback on a clean target Mac is recommended; disclose any testing still outstanding in the prerelease notes.
+
+After those checks, upload the test image and corresponding source as a prerelease. Use the [test release notes](releases/v0.1.0-beta.1.md) to explain the manual launch steps:
+
+```bash
+git tag -a v0.1.0-beta.1 -m 'Shiyin 0.1.0 beta 1'
+git push origin main v0.1.0-beta.1
+gh release create v0.1.0-beta.1 \
+  dist/Shiyin-0.1.0-macos-arm64-LOCAL.dmg \
+  dist/Shiyin-0.1.0-macos-arm64-LOCAL.dmg.sha256 \
+  dist/Shiyin-0.1.0-third-party-sources.tar.gz \
+  --title 'Shiyin 0.1.0 beta' \
+  --notes-file docs/releases/v0.1.0-beta.1.md \
+  --prerelease --verify-tag
+```
 
 ## Upload a GitHub Release
 

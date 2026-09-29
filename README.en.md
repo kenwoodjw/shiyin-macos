@@ -41,7 +41,7 @@ The minimum macOS version of a bundled app depends on its tools and is written i
 
 ## Install the test DMG
 
-Download the test image named `Shiyin-*-macos-arm64-LOCAL.dmg` from [GitHub Releases](https://github.com/kenwoodjw/shiyin-macos/releases). Open it and drag `Shiyin.app` to Applications. This test build requires Apple Silicon and macOS 15 or later. It has an ad hoc signature and has not been notarized by Apple.
+Download the test image named `Shiyin-*-macos-arm64-LOCAL.dmg` from [GitHub Releases](https://github.com/kenwoodjw/shiyin-macos/releases). Open it and drag `Shiyin.app` to Applications. The same prerelease includes a third-party source bundle. This test build requires Apple Silicon and macOS 15 or later. It has an ad hoc signature and has not been notarized by Apple.
 
 If macOS blocks the first launch, try opening the app once, then use **System Settings → Privacy & Security → Open Anyway**. Alternatively, if you trust the download, run:
 
@@ -112,4 +112,4 @@ Only download and use content you have the right to save. This project is not af
 
 ## License
 
-The project code and original assets are available under the [MIT License](LICENSE). Bundled third-party tools such as yt-dlp, FFmpeg, and Deno retain their own licenses; see the [bundled tool notes](docs/bundled-tools.md).
+The project code and original assets are available under the [MIT License](LICENSE). This app uses code from FFmpeg under LGPL 2.1; its corresponding source, the LAME and mpg123 sources, and build instructions are provided in the `third-party-sources` asset of the prerelease. Other bundled tools such as yt-dlp and Deno retain their own licenses; see the [bundled tool notes](docs/bundled-tools.md).

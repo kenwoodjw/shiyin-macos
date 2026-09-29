@@ -42,7 +42,21 @@ xcrun notarytool store-credentials shiyin-notary
 ./script/package_dmg.sh --local
 ```
 
-测试包名会带 `-LOCAL`；它未经过 Apple 公证，不能代替正式发行包。上传测试版之前，仍须完成第三方许可证及源码材料核对，并在干净的目标 Mac 上验证安装与播放。
+测试包名会带 `-LOCAL`；它未经过 Apple 公证，不能代替正式发行包。上传测试版之前，仍须完成第三方许可证及源码材料核对；建议在干净的目标 Mac 上验证安装与播放，未完成的测试要在预发布说明中列明。
+
+经核对后，可将测试包与对应源码一起作为预发布版本上传，并使用[测试版说明](releases/v0.1.0-beta.1.md)明确写出手动打开步骤：
+
+```bash
+git tag -a v0.1.0-beta.1 -m 'Shiyin 0.1.0 beta 1'
+git push origin main v0.1.0-beta.1
+gh release create v0.1.0-beta.1 \
+  dist/Shiyin-0.1.0-macos-arm64-LOCAL.dmg \
+  dist/Shiyin-0.1.0-macos-arm64-LOCAL.dmg.sha256 \
+  dist/Shiyin-0.1.0-third-party-sources.tar.gz \
+  --title '拾音 0.1.0 测试版' \
+  --notes-file docs/releases/v0.1.0-beta.1.md \
+  --prerelease --verify-tag
+```
 
 ## 4. 上传 GitHub Release
 

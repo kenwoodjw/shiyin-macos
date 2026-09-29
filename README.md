@@ -41,7 +41,7 @@
 
 ## 安装测试版 DMG
 
-从 [GitHub Releases](https://github.com/kenwoodjw/shiyin-macos/releases) 下载名称含 `macos-arm64-LOCAL.dmg` 的测试包，打开 DMG，将 `Shiyin.app` 拖到「应用程序」。该测试包仅支持 Apple Silicon 和 macOS 15 或更新版本，采用临时签名，未经过 Apple 公证。
+从 [GitHub Releases](https://github.com/kenwoodjw/shiyin-macos/releases) 下载名称含 `macos-arm64-LOCAL.dmg` 的测试包，打开 DMG，将 `Shiyin.app` 拖到「应用程序」。同一预发布版本提供第三方组件源码包。该测试包仅支持 Apple Silicon 和 macOS 15 或更新版本，采用临时签名，未经过 Apple 公证。
 
 首次打开若被 macOS 拦截，先尝试打开一次，再到「系统设置 → 隐私与安全性」点击「仍要打开」。也可以在确认文件来源可信后，在终端执行：
 
@@ -112,4 +112,4 @@ B 站登录来源在设置中单独选择，默认不使用浏览器 Cookie。�
 
 ## 许可证
 
-本项目代码与自有资源采用 [MIT 许可证](LICENSE)。yt-dlp、FFmpeg、Deno 等第三方工具遵循各自的许可证；打包说明见[内置工具说明](docs/bundled-tools.md)。
+本项目代码与自有资源采用 [MIT 许可证](LICENSE)。本应用使用按 LGPL 2.1 许可的 FFmpeg 代码；对应源码及 LAME、mpg123 源码与构建说明随预发布版本的 `third-party-sources` 附件提供。yt-dlp、Deno 等第三方工具遵循各自的许可证；打包说明见[内置工具说明](docs/bundled-tools.md)。
