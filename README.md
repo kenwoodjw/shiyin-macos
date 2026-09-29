@@ -39,6 +39,19 @@
 
 发行包的最低 macOS 版本取决于所内置工具的构建目标；打包脚本会把它写入应用包。当前构建机上的静态 LAME、mpg123 库要求 macOS 15。
 
+## 安装测试版 DMG
+
+从 [GitHub Releases](https://github.com/kenwoodjw/shiyin-macos/releases) 下载名称含 `macos-arm64-LOCAL.dmg` 的测试包，打开 DMG，将 `Shiyin.app` 拖到「应用程序」。该测试包仅支持 Apple Silicon 和 macOS 15 或更新版本，采用临时签名，未经过 Apple 公证。
+
+首次打开若被 macOS 拦截，先尝试打开一次，再到「系统设置 → 隐私与安全性」点击「仍要打开」。也可以在确认文件来源可信后，在终端执行：
+
+```bash
+xattr -dr com.apple.quarantine "/Applications/Shiyin.app"
+open "/Applications/Shiyin.app"
+```
+
+这只会移除该应用的下载隔离标记，不会为应用签名或公证；请仅对你信任的下载包使用。正式发行版仍计划采用 Developer ID 签名和 Apple 公证。
+
 如果使用 Homebrew，可以安装命令行依赖：
 
 ```bash
@@ -67,7 +80,7 @@ brew install yt-dlp ffmpeg deno
 
 仓库提供 `script/fetch_release_tools.sh` 下载并校验官方 yt-dlp、Deno，以及 `script/build_portable_ffmpeg.sh` 从源码和构建机上的静态 LAME、mpg123 库生成独立的 `ffmpeg`、`ffprobe`；具体命令见内置工具说明。
 
-制作可供 GitHub Release 下载的 DMG，见[DMG 发布流程](docs/release-dmg.md)。没有 Developer ID 证书时，可运行 `./script/package_dmg.sh --local` 生成仅供本机验证的测试包。
+制作 DMG 见[DMG 发布流程](docs/release-dmg.md)。没有 Developer ID 证书时，可运行 `./script/package_dmg.sh --local` 生成需要手动放行的测试包。
 
 ## 如何使用
 

@@ -1,6 +1,6 @@
 # 发布 macOS DMG
 
-`script/package_dmg.sh` 把带内置工具的 `Shiyin.app` 放进只读 DMG，并附上指向 `/Applications` 的快捷方式。正式模式要求 Developer ID 签名、公证和票据装订；`--local` 只生成本机测试包。
+`script/package_dmg.sh` 把带内置工具的 `Shiyin.app` 放进只读 DMG，并附上指向 `/Applications` 的快捷方式。正式模式要求 Developer ID 签名、公证和票据装订；`--local` 生成需手动放行的测试包。
 
 ## 1. 准备内置工具
 
@@ -17,7 +17,7 @@ security find-identity -v -p codesigning
 xcrun notarytool store-credentials shiyin-notary
 ```
 
-第二个命令交互式保存公证凭据，不要把密码或 API 私钥写入仓库。没有证书时可以使用下面的本地测试流程，但不要将生成的 `-LOCAL.dmg` 作为公开下载包。
+第二个命令交互式保存公证凭据，不要把密码或 API 私钥写入仓库。没有证书时可以使用下面的测试流程；分享测试包时，应标注未公证及手动打开步骤，并将 GitHub Release 标为预发布版本。
 
 ## 3. 构建、打包与验证
 
@@ -42,7 +42,7 @@ xcrun notarytool store-credentials shiyin-notary
 ./script/package_dmg.sh --local
 ```
 
-本地测试包名会带 `-LOCAL`；它未经过 Apple 公证，不能代替正式发行包。
+测试包名会带 `-LOCAL`；它未经过 Apple 公证，不能代替正式发行包。上传测试版之前，仍须完成第三方许可证及源码材料核对，并在干净的目标 Mac 上验证安装与播放。
 
 ## 4. 上传 GitHub Release
 

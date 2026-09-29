@@ -39,6 +39,19 @@ These screenshots use sample tracks, not a personal music library.
 
 The minimum macOS version of a bundled app depends on its tools and is written into the app bundle during packaging. The static LAME and mpg123 libraries on the current build Mac require macOS 15.
 
+## Install the test DMG
+
+Download the test image named `Shiyin-*-macos-arm64-LOCAL.dmg` from [GitHub Releases](https://github.com/kenwoodjw/shiyin-macos/releases). Open it and drag `Shiyin.app` to Applications. This test build requires Apple Silicon and macOS 15 or later. It has an ad hoc signature and has not been notarized by Apple.
+
+If macOS blocks the first launch, try opening the app once, then use **System Settings → Privacy & Security → Open Anyway**. Alternatively, if you trust the download, run:
+
+```bash
+xattr -dr com.apple.quarantine "/Applications/Shiyin.app"
+open "/Applications/Shiyin.app"
+```
+
+This removes the app's download quarantine attribute; it does not sign or notarize the app. Use it only for a download you trust. A future regular release should use Developer ID signing and Apple notarization.
+
 With Homebrew, install the command-line dependencies using:
 
 ```bash
@@ -67,7 +80,7 @@ The resulting `dist/Shiyin.app` contains them in `Contents/MacOS/Tools` and uses
 
 The repository includes `script/fetch_release_tools.sh` to download and verify official yt-dlp and Deno releases, and `script/build_portable_ffmpeg.sh` to build standalone `ffmpeg` and `ffprobe` from FFmpeg source and static LAME and mpg123 libraries on the build Mac; see the bundled tool notes for the commands.
 
-See the [DMG release guide](docs/release-dmg.en.md) for a downloadable GitHub Release asset. Without a Developer ID certificate, `./script/package_dmg.sh --local` creates a test image for local validation only.
+See the [DMG release guide](docs/release-dmg.en.md) for packaging details. Without a Developer ID certificate, `./script/package_dmg.sh --local` creates a test image that requires a manual launch override.
 
 ## How to use
 

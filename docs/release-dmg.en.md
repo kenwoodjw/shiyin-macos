@@ -1,6 +1,6 @@
 # Creating a macOS DMG release
 
-`script/package_dmg.sh` places the app with bundled tools in a read-only DMG alongside an `/Applications` shortcut. Release mode requires Developer ID signatures and Apple notarization. `--local` makes a test image only.
+`script/package_dmg.sh` places the app with bundled tools in a read-only DMG alongside an `/Applications` shortcut. Release mode requires Developer ID signatures and Apple notarization. `--local` makes a test image that requires a manual launch override.
 
 ## Prepare the tools
 
@@ -17,7 +17,7 @@ security find-identity -v -p codesigning
 xcrun notarytool store-credentials shiyin-notary
 ```
 
-Do not commit passwords or API private keys. Without a certificate, use the local test flow below.
+Do not commit passwords or API private keys. Without a certificate, use the test flow below. If shared, clearly label the image as unnotarized, explain the manual launch steps, and mark the GitHub Release as a prerelease.
 
 ## Build and package
 
@@ -42,7 +42,7 @@ To verify DMG creation without Developer ID signing:
 ./script/package_dmg.sh --local
 ```
 
-The output has `-LOCAL` in its name and is **not** a public distribution package.
+The output has `-LOCAL` in its name and is **not** a regular distribution package. Before sharing a test image, check third-party license and source materials and test installation and playback on a clean target Mac.
 
 ## Upload a GitHub Release
 
